@@ -7,6 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[hash].js",
+    publicPath: "/",
   },
   devServer: {
     port: 3000,

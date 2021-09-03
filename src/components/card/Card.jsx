@@ -1,12 +1,32 @@
-import React from "react";
-//import "./repo.less";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getContributors, getCurrentRepo } from "../actions/repos";
+import "./card.less";
 const Card = (props) => {
-  const repo = props.repo;
+  const { username, reponame } = useParams();
+  const [repo, setRepo] = useState({ owner: {} });
+  const [contributors, setContributors] = useState([]);
+  useEffect(() => {
+    getCurrentRepo(username, reponame, setRepo);
+    getContributors(username, reponame, setContributors);
+  }, []);
+  console.log(repo);
   return (
-    <div className="repo">
+    <div>
       <button onClick={() => props.history.goBack()} className="back-btn">
-        Back
+        BACK
       </button>
+
+      <div className="card">
+        <img src={repo.owner.avatar_url} alt="" />
+        <div className="name">{repo.name}</div>
+        <div className="stars">{repo.stargazers_count}</div>
+      </div>
+      {contributors.map((c, index) => (
+        <div>
+          {index + 1}. {c.login}
+        </div>
+      ))}
     </div>
   );
 };
