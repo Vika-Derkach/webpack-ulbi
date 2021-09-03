@@ -45,9 +45,12 @@ const Main = () => {
           onChange={(e) => setSearchValue(e.target.value)}
           type="text"
           placeholder="Type repo name"
-          className="search-input"
+          className="form-control search-input"
         />
-        <button onClick={() => searchHandler()} className="search-btn">
+        <button
+          onClick={() => searchHandler()}
+          className="search-btn btn btn-info"
+        >
           Search
         </button>
       </div>

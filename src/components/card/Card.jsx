@@ -13,14 +13,17 @@ const Card = (props) => {
   console.log(repo);
   return (
     <div>
-      <button onClick={() => props.history.goBack()} className="back-btn">
+      <button onClick={() => props.history.goBack()} className="back-btn btn">
         BACK
       </button>
 
       <div className="card">
-        <img src={repo.owner.avatar_url} alt="" />
-        <div className="name">{repo.name}</div>
-        <div className="stars">{repo.stargazers_count}</div>
+        <div class="card-body">
+          {" "}
+          <img src={repo.owner.avatar_url} alt="" />
+          <div className="name card-title">{repo.name}</div>
+          <div className="stars">{repo.stargazers_count}</div>
+        </div>
       </div>
       {contributors.map((c, index) => (
         <div>
