@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import "./app.less";
 import Card from "./card/Card";
+import Error from "./main/Error";
 import Main from "./main/Main";
 export default function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export default function App() {
         <Switch>
           <Route path="/" exact component={Main} />
           <Route path="/card/:username/:reponame" component={Card} />
+          <Route path="/error" component={Error} />
           <Redirect to="/" />
         </Switch>
       </div>

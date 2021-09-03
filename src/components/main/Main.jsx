@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router";
 import { setCurrentPage } from "../../reducers/reposReducer";
 import { createPages } from "../../utils/pagesCreator";
 import { getRepos } from "../actions/repos";
@@ -12,9 +13,12 @@ const Main = () => {
   const currentPage = useSelector((state) => state.repos.currentPage);
   const perPage = useSelector((state) => state.repos.perPage);
   const totalCount = useSelector((state) => state.repos.totalCount);
+  const isFetchError = useSelector((state) => state.repos.isFetchError);
+
   const [searchValue, setSearchValue] = useState("");
   const pagesCount = Math.ceil(totalCount / perPage);
   const pages = [];
+
   createPages(pages, pagesCount, currentPage);
   useEffect(() => {
     dispatch(getRepos(searchValue, currentPage, perPage));
@@ -24,6 +28,11 @@ const Main = () => {
     dispatch(currentPage(1));
     dispatch(getRepos(searchValue, currentPage, perPage));
   }
+
+  if (isFetchError) {
+    return <Redirect to="/error" />;
+  }
+
   return (
     <div>
       <div className="search">
