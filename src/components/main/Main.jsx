@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router";
 import { setCurrentPage } from "../../reducers/reposReducer";
 import { createPages } from "../../utils/pagesCreator";
 import { getRepos } from "../actions/repos";
@@ -29,12 +28,17 @@ const Main = () => {
     dispatch(getRepos(searchValue, currentPage, perPage));
   }
 
-  if (isFetchError) {
-    return <Redirect to="/error" />;
-  }
+  //   if (isFetchError) {
+  //     return <Redirect to="/error" />;
+  //   }
 
   return (
     <div>
+      {isFetchError && (
+        <div class="alert alert-danger" role="alert">
+          There was an error!!! Please, reload the page!
+        </div>
+      )}
       <div className="search">
         <input
           value={searchValue}
